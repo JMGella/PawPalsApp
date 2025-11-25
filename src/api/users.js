@@ -1,10 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-/**
- * Create a new user (register)
- * @param {Object} userData - User data
- * @returns {Promise<Object>} Created user
- */
 export async function createUser(userData) {
   const res = await fetch(`${API_URL}/pawpalsapi/users`, {
     method: 'POST',
@@ -22,12 +17,6 @@ export async function createUser(userData) {
   return res.json();
 }
 
-/**
- * Get user by ID
- * @param {number} userId - User ID
- * @param {string} token - JWT token
- * @returns {Promise<Object>} User data
- */
 export async function getUser(userId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}`, {
     headers: {
@@ -44,11 +33,6 @@ export async function getUser(userId, token) {
   return res.json();
 }
 
-/**
- * Get all users
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of users
- */
 export async function getAllUsers(token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users`, {
     headers: {
@@ -65,13 +49,6 @@ export async function getAllUsers(token) {
   return res.json();
 }
 
-/**
- * Update user data
- * @param {number} userId - User ID
- * @param {Object} userData - Updated user data
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Updated user
- */
 export async function updateUser(userId, userData, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}`, {
     method: 'PATCH',
@@ -90,12 +67,6 @@ export async function updateUser(userId, userData, token) {
   return res.json();
 }
 
-/**
- * Delete user
- * @param {number} userId - User ID
- * @param {string} token - JWT token
- * @returns {Promise<void>}
- */
 export async function deleteUser(userId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}`, {
     method: 'DELETE',

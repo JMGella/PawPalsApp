@@ -1,12 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-/**
- * Create a new walk
- * @param {number} userId - User ID
- * @param {Object} walkData - Walk data
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Created walk
- */
 export async function createWalk(userId, walkData, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}/walks`, {
     method: 'POST',
@@ -25,12 +18,6 @@ export async function createWalk(userId, walkData, token) {
   return res.json();
 }
 
-/**
- * Get all walks created by a user
- * @param {number} userId - User ID
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of walks
- */
 export async function getUserWalks(userId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}/walks`, {
     headers: {
@@ -47,11 +34,6 @@ export async function getUserWalks(userId, token) {
   return res.json();
 }
 
-/**
- * Get all walks
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of all walks
- */
 export async function getAllWalks(token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks`, {
     headers: {
@@ -68,11 +50,6 @@ export async function getAllWalks(token) {
   return res.json();
 }
 
-/**
- * Get upcoming walks
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of upcoming walks
- */
 export async function getUpcomingWalks(token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/upcoming`, {
     headers: {
@@ -89,12 +66,6 @@ export async function getUpcomingWalks(token) {
   return res.json();
 }
 
-/**
- * Get walk by ID
- * @param {number} walkId - Walk ID
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Walk data
- */
 export async function getWalkById(walkId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}`, {
     headers: {
@@ -111,13 +82,6 @@ export async function getWalkById(walkId, token) {
   return res.json();
 }
 
-/**
- * Update walk data
- * @param {number} walkId - Walk ID
- * @param {Object} walkData - Updated walk data
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Updated walk
- */
 export async function updateWalk(walkId, walkData, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}`, {
     method: 'PATCH',
@@ -136,12 +100,6 @@ export async function updateWalk(walkId, walkData, token) {
   return res.json();
 }
 
-/**
- * Cancel a walk
- * @param {number} walkId - Walk ID
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Cancelled walk
- */
 export async function cancelWalk(walkId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/cancel`, {
     method: 'POST',
@@ -159,12 +117,6 @@ export async function cancelWalk(walkId, token) {
   return res.json();
 }
 
-/**
- * Get walk summary (walk info + participants)
- * @param {number} walkId - Walk ID
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Walk summary
- */
 export async function getWalkSummary(walkId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/summary`, {
     headers: {
@@ -181,12 +133,6 @@ export async function getWalkSummary(walkId, token) {
   return res.json();
 }
 
-/**
- * Get walks joined by user's dogs
- * @param {number} userId - User ID
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of walks joined
- */
 export async function getJoinedWalks(userId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}/walks/joined`, {
     headers: {

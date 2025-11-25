@@ -1,10 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-/**
- * Authenticate user and get JWT token
- * @param {Object} credentials - { username, password }
- * @returns {Promise<Object>} Token response
- */
 export async function login(credentials) {
   const res = await fetch(`${API_URL}/pawpalsapi/auth/token`, {
     method: 'POST',

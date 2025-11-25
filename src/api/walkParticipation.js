@@ -1,12 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-/**
- * Add a dog to a walk
- * @param {number} walkId - Walk ID
- * @param {Object} participationData - { dogId, ... }
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Participation data
- */
 export async function addDogToWalk(walkId, participationData, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/dogs`, {
     method: 'POST',
@@ -25,12 +18,6 @@ export async function addDogToWalk(walkId, participationData, token) {
   return res.json();
 }
 
-/**
- * Get all dogs participating in a walk
- * @param {number} walkId - Walk ID
- * @param {string} token - JWT token
- * @returns {Promise<Array>} List of participating dogs
- */
 export async function getWalkParticipants(walkId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/dogs`, {
     headers: {
@@ -47,13 +34,6 @@ export async function getWalkParticipants(walkId, token) {
   return res.json();
 }
 
-/**
- * Update walk participation
- * @param {number} walkDogId - Walk-Dog relationship ID
- * @param {Object} participationData - Updated participation data
- * @param {string} token - JWT token
- * @returns {Promise<Object>} Updated participation
- */
 export async function updateParticipation(walkDogId, participationData, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/update-participation/${walkDogId}`, {
     method: 'PATCH',
@@ -72,12 +52,6 @@ export async function updateParticipation(walkDogId, participationData, token) {
   return res.json();
 }
 
-/**
- * Remove a dog from a walk
- * @param {number} walkDogId - Walk-Dog relationship ID
- * @param {string} token - JWT token
- * @returns {Promise<void>}
- */
 export async function removeDogFromWalk(walkDogId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/remove-dog/${walkDogId}`, {
     method: 'DELETE',

@@ -22,13 +22,12 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     try {
       const response = await loginApi(credentials);
-      const { token, user } = response;
+      
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-
-      setToken(token);
-      setUser(user);
+      setToken(response.token);
+      setUser(response.user);
 
       return { success: true };
     } catch (error) {

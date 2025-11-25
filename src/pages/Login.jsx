@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
@@ -13,7 +13,7 @@ export function Login() {
     e.preventDefault();
     setError('');
 
-    const result = await login({ username, password });
+    const result = await login({ email, password });
 
     if (result.success) {
       navigate('/dashboard');
@@ -29,11 +29,11 @@ export function Login() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            Usuario:
+            Email:
             <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </label>
@@ -61,6 +61,6 @@ export function Login() {
       </p>
     </div>
   ); 
-  
+
 }
 

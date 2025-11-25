@@ -10,7 +10,11 @@ export function Home() {
       <p>La red social para conectar con otros dueños de perros y organizar paseos</p>
 
       {isAuthenticated ? (
-        <Navigate to="/dashboard" />
+        <div>
+          <Link to="/dashboard">
+            <button>Entrar</button>
+          </Link>
+        </div>
       ) : (
         <div>
           <Link to="/login">

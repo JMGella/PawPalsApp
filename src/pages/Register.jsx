@@ -4,11 +4,12 @@ import { createUser } from '../api/users';
 
 export function Register() {
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: '',
     confirmPassword: '',
-    name: '',
+    displayName: '',
+    username: '',
+    profileImageUrl: '',
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -31,10 +32,11 @@ export function Register() {
 
     try {
       await createUser({
-        username: formData.username,
         email: formData.email,
         password: formData.password,
-        name: formData.name,
+        displayName: formData.displayName,
+        username: formData.username,
+        profileImageUrl: formData.profileImageUrl || null,
       });
 
       navigate('/login');
@@ -48,32 +50,6 @@ export function Register() {
       <h1>Registro</h1>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Nombre:
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Usuario:
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-
         <div>
           <label>
             Email:
@@ -112,6 +88,33 @@ export function Register() {
             />
           </label>
         </div>
+
+        <div>
+          <label>
+            Nombre:
+            <input
+              type="text"
+              name="displayName"
+              value={formData.displayName}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Usuario:
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+
 
         {error && <div>{error}</div>}
 

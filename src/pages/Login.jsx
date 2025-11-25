@@ -57,9 +57,10 @@ export function Login() {
       </form>
 
       <p>
-        ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+        ¿No tienes cuenta?  <Link to="/register">Regístrate</Link>
       </p>
     </div>
-  );
+  ); 
+  
 }
 

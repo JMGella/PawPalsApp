@@ -17,9 +17,9 @@ export function Dashboard() {
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">Tu perfil</h5>
-                <p className="card-text"><strong>Usuario:</strong> {user?.username}</p>
-                <p className="card-text"><strong>Email:</strong> {user?.email}</p>
                 {user?.displayName && <p className="card-text"><strong>Nombre:</strong> {user.displayName}</p>}
+                {user?.username && <p className="card-text"><strong>Usuario:</strong> {user.username}</p>}
+                <p className="card-text"><strong>Email:</strong> {user?.email}</p>
               </div>
             </div>
           </div>

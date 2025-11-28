@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { login as loginApi } from '../api/auth';
+import { getCurrentUser } from '../api/users';
 
 export const AuthContext = createContext();
 
@@ -22,12 +23,15 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     try {
       const response = await loginApi(credentials);
+      const token = response.token;
       
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
+      const userData = await getCurrentUser(token);
+      
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
 
-      setToken(response.token);
-      setUser(response.user);
+      setToken(token);
+      setUser(userData);
 
       return { success: true };
     } catch (error) {

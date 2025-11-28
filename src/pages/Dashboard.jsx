@@ -8,15 +8,21 @@ export function Dashboard() {
     <div>
       <Navbar />
       
-      <div>
-        <h1>Dashboard</h1>
-        <p>Bienvenido, {user?.displayName || user?.username}!</p>
-        
-        <div>
-          <h2>Tu perfil</h2>
-          <p>Usuario: {user?.username}</p>
-          <p>Email: {user?.email}</p>
-          {user?.displayName && <p>Nombre: {user.displayName}</p>}
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 mx-auto">
+            <h1 className="mb-4">Dashboard</h1>
+            <p className="lead">Bienvenido, {user?.displayName || user?.username}!</p>
+            
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Tu perfil</h5>
+                <p className="card-text"><strong>Usuario:</strong> {user?.username}</p>
+                <p className="card-text"><strong>Email:</strong> {user?.email}</p>
+                {user?.displayName && <p className="card-text"><strong>Nombre:</strong> {user.displayName}</p>}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

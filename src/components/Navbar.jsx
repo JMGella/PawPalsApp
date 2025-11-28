@@ -27,13 +27,16 @@ export function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">Dashboard</Link>
+              <Link className="nav-link" to="/walks">Paseos</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/dogs">Mis Perros</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/walks">Paseos</Link>
+              <Link className="nav-link" to="/pawfriends">PawFriends</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/dashboard">Panel de Control</Link>
             </li>
           </ul>
           

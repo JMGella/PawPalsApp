@@ -125,7 +125,7 @@ export function Register() {
                   </div>
                 )}
 
-                <button type="submit" className="btn btn-primary w-100 mb-3">
+                <button type="submit" className="btn btn-info w-100 mb-3">
                   Registrarse
                 </button>
               </form>

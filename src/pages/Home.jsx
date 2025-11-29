@@ -16,16 +16,16 @@ export function Home() {
           {isAuthenticated ? (
             <div>
               <Link to="/dashboard">
-                <button className="btn btn-primary btn-lg">Entrar</button>
+                <button className="btn btn-info btn-lg">Entrar</button>
               </Link>
             </div>
           ) : (
             <div className="d-flex gap-3 justify-content-center">
               <Link to="/login">
-                <button className="btn btn-primary btn-lg">Iniciar sesión</button>
+                <button className="btn btn-info btn-lg">Iniciar sesión</button>
               </Link>
               <Link to="/register">
-                <button className="btn btn-outline-primary btn-lg">Registrarse</button>
+                <button className="btn btn-outline-info btn-lg">Registrarse</button>
               </Link>
             </div>
           )}

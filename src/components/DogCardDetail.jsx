@@ -1,6 +1,6 @@
 import defaultDogImage from '../assets/default_dog.png';
 
-export function DogCardDetail({ dog }) {
+export function DogCardDetail({ dog, showFollowButton, isFollowing, onFollowToggle, followLoading }) {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
@@ -28,6 +28,17 @@ export function DogCardDetail({ dog }) {
             </>
           )}
         </p>
+        
+        {/* Botón de seguir/dejar de seguir */}
+        {showFollowButton && (
+          <button 
+            className={`btn ${isFollowing ? 'btn-outline-info' : 'btn-info'} w-100`}
+            onClick={onFollowToggle}
+            disabled={followLoading}
+          >
+            {followLoading ? 'Cargando...' : isFollowing ? '✓ Siguiendo' : '+ Seguir'}
+          </button>
+        )}
       </div>
     </div>
   );

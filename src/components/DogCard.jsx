@@ -1,13 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import defaultDogImage from '../assets/default_dog.png';
 
 export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowing, actions = 'edit' }) {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
     return `${day}/${month}/${year}`;
+  };
+
+  const isMyDog = () => {
+    return dog?.owner?.id === user?.id;
   };
 
   const renderActions = () => {
@@ -31,19 +37,24 @@ export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowi
     }
 
     if (actions === 'follow') {
+      // No mostrar botón si es mi perro
+      if (isMyDog()) {
+        return null;
+      }
+      
       return isFollowing ? (
         <button 
-          className="btn btn-secondary btn-sm"
+          className="btn btn-outline-info btn-sm"
           onClick={() => onUnfollow(dog.id)}
         >
-          Dejar de seguir
+          ✓ Siguiendo
         </button>
       ) : (
         <button 
           className="btn btn-info btn-sm"
           onClick={() => onFollow(dog.id)}
         >
-          Seguir
+          + Seguir
         </button>
       );
     }

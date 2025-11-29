@@ -114,3 +114,19 @@ export async function getDogWalks(dogId, token) {
 
   return res.json();
 }
+
+export async function getDogWalksDetail(dogId, token) {
+  const res = await fetch(`${API_URL}/pawpalsapi/dogs/${dogId}/walks-detail`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'Error al obtener paseos del perro');
+  }
+
+  return res.json();
+}

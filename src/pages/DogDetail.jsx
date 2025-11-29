@@ -2,18 +2,21 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { DogCardDetail } from '../components/DogCardDetail';
-import { WalkCard } from '../components/WalkCard';
+import { DogWalksList } from '../components/DogWalksList';
 import { useAuth } from '../hooks/useAuth';
-import { getDogById, getDogWalks } from '../api/dogs';
+import { getDogById, getDogWalksDetail } from '../api/dogs';
+import { followDog, unfollowDog, getFollowedDogs } from '../api/follows';
 
 export function DogDetail() {
   const { dogId } = useParams();
-  const { token } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
   const [dog, setDog] = useState(null);
   const [walks, setWalks] = useState([]);
+  const [followedDogs, setFollowedDogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [followLoading, setFollowLoading] = useState(false);
 
   useEffect(() => {
     loadDogData();
@@ -23,16 +26,47 @@ export function DogDetail() {
     try {
       setLoading(true);
       setError('');
-      const [dogData, walksData] = await Promise.all([
+      const [dogData, walksData, followedDogsData] = await Promise.all([
         getDogById(dogId, token),
-        getDogWalks(dogId, token)
+        getDogWalksDetail(dogId, token),
+        getFollowedDogs(user.id, token)
       ]);
       setDog(dogData);
       setWalks(walksData);
+      setFollowedDogs(followedDogsData);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const isMyDog = () => {
+    return dog?.owner?.id === user.id;
+  };
+
+  const isFollowing = () => {
+    return followedDogs.some(followedDog => followedDog.id === parseInt(dogId));
+  };
+
+  const handleFollowToggle = async () => {
+    try {
+      setFollowLoading(true);
+      setError('');
+      
+      if (isFollowing()) {
+        await unfollowDog(user.id, dogId, token);
+      } else {
+        await followDog(user.id, dogId, token);
+      }
+      
+      // Recargar solo los perros seguidos
+      const followedDogsData = await getFollowedDogs(user.id, token);
+      setFollowedDogs(followedDogsData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setFollowLoading(false);
     }
   };
 
@@ -88,29 +122,28 @@ export function DogDetail() {
           ← Volver
         </button>
 
+        {error && (
+          <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            {error}
+            <button type="button" className="btn-close" onClick={() => setError('')}></button>
+          </div>
+        )}
+
         <div className="row">
           {/* Información del perro */}
           <div className="col-md-4 mb-4">
-            <DogCardDetail dog={dog} />
+            <DogCardDetail 
+              dog={dog}
+              showFollowButton={!isMyDog()}
+              isFollowing={isFollowing()}
+              onFollowToggle={handleFollowToggle}
+              followLoading={followLoading}
+            />
           </div>
 
           {/* Paseos del perro */}
           <div className="col-md-8">
-            <h3 className="mb-3">Paseos ({walks.length})</h3>
-            
-            {walks.length === 0 ? (
-              <div className="alert alert-info">
-                Este perro no está apuntado a ningún paseo todavía.
-              </div>
-            ) : (
-              <div className="row">
-                {walks.map((walk) => (
-                  <div key={walk.id} className="col-12 mb-3">
-                    <WalkCard walk={walk} />
-                  </div>
-                ))}
-              </div>
-            )}
+            <DogWalksList walks={walks} />
           </div>
         </div>
       </div>

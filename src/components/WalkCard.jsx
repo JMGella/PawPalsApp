@@ -92,7 +92,7 @@ export function WalkCard({ walk }) {
         <p className="card-text">
           <strong>📅 Inicio:</strong> {formatDateTime(walk.startTime)}<br />
           <strong>🐕 Perros:</strong> {loadingParticipants ? '...' : `${participantsCount} / ${walk.maxDogs}`}<br />
-          <strong>👤 Creado por:</strong> {walk.creator.displayName}<br />
+          <strong>👤 Creado por:</strong> {walk.creator?.displayName || walk.creator?.username || 'Usuario'}<br />
           <span className={`badge ${statusConfig.bg}`}>
             {statusConfig.text}
           </span>

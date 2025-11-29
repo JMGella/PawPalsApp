@@ -13,7 +13,7 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info mb-4">
       <div className="container">
-        <Link className="navbar-brand text-dark fw-bold" to="/dashboard">🐾 PawPals</Link>
+        <Link className="navbar-brand text-dark fw-bold" to="/">🐾 PawPals</Link>
         
         <button 
           className="navbar-toggler" 
@@ -27,6 +27,9 @@ export function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
+              <Link className="nav-link text-dark" to="/">Inicio</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link text-dark" to="/walks">Paseos</Link>
             </li>
             <li className="nav-item">
@@ -36,7 +39,7 @@ export function Navbar() {
               <Link className="nav-link text-dark" to="/pawfriends">PawFriends</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/dashboard">Panel de Control</Link>
+              <Link className="nav-link text-dark" to="/dashboard">Perfil</Link>
             </li>
           </ul>
           

@@ -12,7 +12,7 @@ export function Dashboard() {
       <div className="container">
         <div className="row">
           <div className="col-md-8 mx-auto">
-            <h1 className="mb-4">Panel de Control</h1>
+            <h1 className="mb-4">Mi Perfil</h1>
             
             <div className="card">
               <div className="card-body">

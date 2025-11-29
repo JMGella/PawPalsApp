@@ -3,6 +3,7 @@ import { useAuth } from './hooks/useAuth';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { Landing } from './pages/Landing';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { Dogs } from './pages/Dogs';
@@ -18,14 +19,23 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route 
+          path="/" 
+          element={isAuthenticated ? (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          ) : (
+            <Landing />
+          )} 
+        />
         <Route 
           path="/login" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} 
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} 
         />
         <Route 
           path="/register" 
-          element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Register />} 
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Register />} 
         />
         
         <Route 

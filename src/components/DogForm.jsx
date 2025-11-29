@@ -90,7 +90,7 @@ export function DogForm({ onSubmit, onCancel, initialData = null }) {
           </div>
 
           <div className="d-flex gap-2">
-            <button type="submit" className="btn btn-primary">Guardar</button>
+            <button type="submit" className="btn btn-info">Guardar</button>
             {onCancel && (
               <button type="button" className="btn btn-secondary" onClick={onCancel}>
                 Cancelar

@@ -6,7 +6,9 @@ import { Register } from './pages/Register';
 import { Home } from './pages/Home';
 import { Dashboard } from './pages/Dashboard';
 import { Dogs } from './pages/Dogs';
+import { DogDetail } from './pages/DogDetail';
 import { Walks } from './pages/Walks';
+import { PawFriends } from './pages/PawFriends';
 import './App.css';
 
 function App() {
@@ -42,10 +44,26 @@ function App() {
           } 
         />
         <Route 
+          path="/dogs/:dogId" 
+          element={
+            <ProtectedRoute>
+              <DogDetail />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
           path="/walks" 
           element={
             <ProtectedRoute>
               <Walks />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/pawfriends" 
+          element={
+            <ProtectedRoute>
+              <PawFriends />
             </ProtectedRoute>
           } 
         />

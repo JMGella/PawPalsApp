@@ -23,7 +23,7 @@ export function SearchBox({ onSearch, placeholder = "Buscar..." }) {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-info" type="submit">
               Buscar
             </button>
           </div>

@@ -11,9 +11,9 @@ export function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <nav className="navbar navbar-expand-lg navbar-light bg-info mb-4">
       <div className="container">
-        <Link className="navbar-brand" to="/dashboard">🐾 PawPals</Link>
+        <Link className="navbar-brand text-dark fw-bold" to="/dashboard">🐾 PawPals</Link>
         
         <button 
           className="navbar-toggler" 
@@ -27,22 +27,22 @@ export function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/walks">Paseos</Link>
+              <Link className="nav-link text-dark" to="/walks">Paseos</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/dogs">Mis Perros</Link>
+              <Link className="nav-link text-dark" to="/dogs">Mis Perros</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/pawfriends">PawFriends</Link>
+              <Link className="nav-link text-dark" to="/pawfriends">PawFriends</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">Panel de Control</Link>
+              <Link className="nav-link text-dark" to="/dashboard">Panel de Control</Link>
             </li>
           </ul>
           
           <div className="d-flex align-items-center">
-            <span className="text-white me-3">Hola, {user?.displayName || user?.username}</span>
-            <button className="btn btn-outline-light btn-sm" onClick={handleLogout}>
+            <span className="text-dark me-3">Hola, {user?.displayName || user?.username}</span>
+            <button className="btn btn-outline-dark btn-sm" onClick={handleLogout}>
               Cerrar sesión
             </button>
           </div>

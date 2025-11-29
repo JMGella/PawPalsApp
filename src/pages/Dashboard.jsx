@@ -1,5 +1,6 @@
 import { Navbar } from '../components/Navbar';
 import { useAuth } from '../hooks/useAuth';
+import defaultUserImage from '../assets/default_user.png';
 
 export function Dashboard() {
   const { user } = useAuth();
@@ -11,12 +12,29 @@ export function Dashboard() {
       <div className="container">
         <div className="row">
           <div className="col-md-8 mx-auto">
-            <h1 className="mb-4">Dashboard</h1>
-            <p className="lead">Bienvenido, {user?.displayName || user?.username}!</p>
+            <h1 className="mb-4">Panel de Control</h1>
             
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">Tu perfil</h5>
+                <div className="d-flex align-items-center mb-3">
+                  <img 
+                    src={user?.profileImageUrl || defaultUserImage}
+                    alt={user?.displayName || user?.username}
+                    style={{ 
+                      width: '100px', 
+                      height: '100px', 
+                      objectFit: 'cover',
+                      borderRadius: '50%',
+                      marginRight: '20px'
+                    }}
+                  />
+                  <div>
+                    <h3 className="mb-1">{user?.displayName || user?.username}</h3>
+                    <p className="text-muted mb-0">@{user?.username}</p>
+                  </div>
+                </div>
+                <hr />
+                <h5 className="card-title">Información del perfil</h5>
                 {user?.displayName && <p className="card-text"><strong>Nombre:</strong> {user.displayName}</p>}
                 {user?.username && <p className="card-text"><strong>Usuario:</strong> {user.username}</p>}
                 <p className="card-text"><strong>Email:</strong> {user?.email}</p>

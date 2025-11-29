@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { DogCard } from '../components/DogCard';
+import { SearchBox } from '../components/SearchBox';
 import { useAuth } from '../hooks/useAuth';
 import { getFollowedDogs, followDog, unfollowDog } from '../api/follows';
 import { searchDogs } from '../api/dogs';
@@ -9,7 +10,6 @@ export function PawFriends() {
   const { user, token } = useAuth();
   const [followedDogs, setFollowedDogs] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [searchName, setSearchName] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -29,10 +29,7 @@ export function PawFriends() {
     }
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!searchName.trim()) return;
-
+  const handleSearch = async (searchName) => {
     try {
       setError('');
       const results = await searchDogs(searchName, token);
@@ -47,10 +44,13 @@ export function PawFriends() {
       setError('');
       await followDog(user.id, dogId, token);
       loadFollowedDogs();
-      // Actualizar resultados de búsqueda
+      // Actualizar resultados de búsqueda si existen
       if (searchResults.length > 0) {
-        const results = await searchDogs(searchName, token);
-        setSearchResults(results);
+        setSearchResults(prevResults => 
+          prevResults.map(dog => 
+            dog.id === dogId ? dog : dog
+          )
+        );
       }
     } catch (err) {
       setError(err.message);
@@ -85,25 +85,10 @@ export function PawFriends() {
         )}
 
         {/* Buscador */}
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">Buscar Perros</h5>
-            <form onSubmit={handleSearch}>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nombre del perro..."
-                  value={searchName}
-                  onChange={(e) => setSearchName(e.target.value)}
-                />
-                <button className="btn btn-primary" type="submit">
-                  Buscar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <SearchBox 
+          onSearch={handleSearch}
+          placeholder="Nombre del perro..."
+        />
 
         {/* Resultados de búsqueda */}
         {searchResults.length > 0 && (

@@ -7,8 +7,8 @@ import { WalkMapCard } from '../components/WalkMapCard';
 import { ParticipantsList } from '../components/ParticipantsList';
 import { AddDogModal } from '../components/AddDogModal';
 import { useAuth } from '../hooks/useAuth';
-import { getWalkById, updateWalk } from '../api/walks';
-import { getWalkParticipants, addDogToWalk, removeDogFromWalk, updateParticipation } from '../api/walkParticipation';
+import { getWalkSummary, updateWalk } from '../api/walks';
+import { addDogToWalk, removeDogFromWalk, updateParticipation } from '../api/walkParticipation';
 import { getUserDogs } from '../api/dogs';
 
 export function WalkDetail() {
@@ -33,13 +33,13 @@ export function WalkDetail() {
     try {
       setLoading(true);
       setError('');
-      const [walkData, participantsData, dogsData] = await Promise.all([
-        getWalkById(walkId, token),
-        getWalkParticipants(walkId, token),
+      // getWalkSummary devuelve walk + participantes en una llamada
+      const [summaryData, dogsData] = await Promise.all([
+        getWalkSummary(walkId, token),
         getUserDogs(user.id, token)
       ]);
-      setWalk(walkData);
-      setParticipants(participantsData);
+      setWalk(summaryData.walk);
+      setParticipants(summaryData.participants);
       setMyDogs(dogsData);
     } catch (err) {
       setError(err.message);
@@ -114,17 +114,17 @@ export function WalkDetail() {
       setError('');
       await updateWalk(walkId, formData, token);
       setShowEditForm(false);
-      loadWalkData(); // Recargar datos
+      loadWalkData();
     } catch (err) {
       setError(err.message);
     }
   };
 
-  // convertir los datos del walk para el  formulario
+  // preparar datos del paseo para el formulario
   const getWalkFormData = () => {
     if (!walk) return null;
     
-    // Convertir offset date a datetime-local format
+    // convertir fecha ISO a formato datetime-local
     const formatToDateTimeLocal = (isoString) => {
       if (!isoString) return '';
       const date = new Date(isoString);
@@ -148,7 +148,7 @@ export function WalkDetail() {
     };
   };
 
-  // perros apuntados
+  // filtrar perros que ya están apuntados
   const availableDogs = myDogs.filter(
     dog => !participants.some(p => p.dog?.id === dog.id)
   );
@@ -196,7 +196,7 @@ export function WalkDetail() {
     );
   }
 
-  // Añadir contador de participantes al objeto walk para WalkInfoCard
+  // añadir el contador de participantes para el componente
   const walkWithCount = { ...walk, participantsCount: participants.length };
 
   return (
@@ -205,7 +205,7 @@ export function WalkDetail() {
       
       <div className="container">
         <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
-          ← Volver
+          Volver
         </button>
 
         {error && (
@@ -215,7 +215,7 @@ export function WalkDetail() {
           </div>
         )}
 
-        {/* Formulario de edición o vista de detalles */}
+        {/* formulario o vista */}
         {showEditForm ? (
           <div className="mb-4">
             <WalkForm 
@@ -226,7 +226,7 @@ export function WalkDetail() {
           </div>
         ) : (
           <div className="row">
-            {/* Columna izquierda: Info del paseo y mapa */}
+            {/* info y mapa */}
             <div className="col-md-6 mb-4">
               <WalkInfoCard
                 walk={walkWithCount}
@@ -240,7 +240,7 @@ export function WalkDetail() {
               />
             </div>
 
-            {/* Columna derecha: Lista de participantes */}
+            {/* participantes */}
             <div className="col-md-6">
               <ParticipantsList
                 participants={participants}
@@ -256,7 +256,7 @@ export function WalkDetail() {
           </div>
         )}
 
-        {/* Modal para apuntar perro */}
+        {/* modal apuntar perro */}
         <AddDogModal
           show={showAddDogModal}
           availableDogs={availableDogs}

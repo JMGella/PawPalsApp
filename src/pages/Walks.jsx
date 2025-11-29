@@ -3,16 +3,17 @@ import { Navbar } from '../components/Navbar';
 import { WalkCard } from '../components/WalkCard';
 import { WalkForm } from '../components/WalkForm';
 import { useAuth } from '../hooks/useAuth';
-import { getUpcomingWalks, createWalk, getUserWalks } from '../api/walks';
+import { getUpcomingWalks, createWalk, getUserWalks, getJoinedWalks } from '../api/walks';
 
 export function Walks() {
   const { user, token } = useAuth();
   const [upcomingWalks, setUpcomingWalks] = useState([]);
   const [myWalks, setMyWalks] = useState([]);
+  const [joinedWalks, setJoinedWalks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
-  const [activeTab, setActiveTab] = useState('upcoming'); // 'upcoming' o 'my-walks'
+  const [activeTab, setActiveTab] = useState('upcoming');
 
   useEffect(() => {
     loadWalks();
@@ -25,9 +26,12 @@ export function Walks() {
       if (activeTab === 'upcoming') {
         const data = await getUpcomingWalks(token);
         setUpcomingWalks(data);
-      } else {
+      } else if (activeTab === 'my-walks') {
         const data = await getUserWalks(user.id, token);
         setMyWalks(data);
+      } else if (activeTab === 'joined') {
+        const data = await getJoinedWalks(user.id, token);
+        setJoinedWalks(data);
       }
     } catch (err) {
       setError(err.message);
@@ -47,7 +51,12 @@ export function Walks() {
     }
   };
 
-  const currentWalks = activeTab === 'upcoming' ? upcomingWalks : myWalks;
+  const getCurrentWalks = () => {
+    if (activeTab === 'upcoming') return upcomingWalks;
+    if (activeTab === 'my-walks') return myWalks;
+    if (activeTab === 'joined') return joinedWalks.map(p => p.walk);
+    return [];
+  };
 
   return (
     <div>
@@ -77,7 +86,7 @@ export function Walks() {
           />
         )}
 
-        {/* Tabs */}
+        {/* tabs */}
         <ul className="nav nav-tabs mb-4">
           <li className="nav-item">
             <button 
@@ -95,20 +104,30 @@ export function Walks() {
               Mis Paseos Creados
             </button>
           </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-link ${activeTab === 'joined' ? 'active' : ''}`}
+              onClick={() => setActiveTab('joined')}
+            >
+              Paseos de mis Perros
+            </button>
+          </li>
         </ul>
 
-        {/* Lista de paseos */}
+        {/* lista paseos */}
         {loading ? (
           <p>Cargando...</p>
-        ) : currentWalks.length === 0 ? (
+        ) : getCurrentWalks().length === 0 ? (
           <div className="alert alert-info">
             {activeTab === 'upcoming' 
               ? 'No hay paseos próximos disponibles.'
-              : 'No has creado ningún paseo todavía.'}
+              : activeTab === 'my-walks'
+              ? 'No has creado ningún paseo todavía.'
+              : 'Tus perros no están apuntados a ningún paseo.'}
           </div>
         ) : (
           <div className="row">
-            {currentWalks.map((walk) => (
+            {getCurrentWalks().map((walk) => (
               <div key={walk.id} className="col-12 col-md-6 col-lg-4 mb-3">
                 <WalkCard walk={walk} />
               </div>

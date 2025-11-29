@@ -29,7 +29,7 @@ export function DogCardDetail({ dog, showFollowButton, isFollowing, onFollowTogg
           )}
         </p>
         
-        {/* Botón de seguir/dejar de seguir */}
+        {/* boton seguir */}
         {showFollowButton && (
           <button 
             className={`btn ${isFollowing ? 'btn-outline-info' : 'btn-info'} w-100`}

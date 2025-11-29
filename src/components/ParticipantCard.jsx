@@ -40,7 +40,7 @@ export function ParticipantCard({
                 <p className="text-muted mb-0">
                   <small>{participant.dog?.breed}</small>
                 </p>
-                {/* Mostrar estado o desplegable si soy el creador */}
+                {/* estado o dropdown si soy creador */}
                 {isWalkScheduled && isCreator ? (
                   <select 
                     className="form-select form-select-sm mt-2 w-auto"
@@ -61,9 +61,9 @@ export function ParticipantCard({
                 )}
               </div>
             </div>
-            {/* Botones de acción */}
+            {/* botones */}
             <div className="d-flex gap-2">
-              {/* Desapuntar si es mi perro y el paseo está SCHEDULED */}
+              {/* boton desapuntar */}
               {isWalkScheduled && isMyDog && (
                 <button 
                   className="btn btn-danger btn-sm"

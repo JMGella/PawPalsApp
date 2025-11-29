@@ -37,7 +37,7 @@ export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowi
     }
 
     if (actions === 'follow') {
-      // No mostrar botón si es mi perro
+      // no mostrar si es mi perro
       if (isMyDog()) {
         return null;
       }

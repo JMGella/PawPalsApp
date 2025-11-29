@@ -60,7 +60,7 @@ export function WalkForm({ initialData, onSubmit, onCancel }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Convertir datetime a offsetdatetime 
+    // convertir datetime a ISO
     const formatToISO = (dateTimeString) => {
       if (!dateTimeString) return null;
       const date = new Date(dateTimeString);

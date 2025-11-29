@@ -100,23 +100,6 @@ export async function updateWalk(walkId, walkData, token) {
   return res.json();
 }
 
-export async function cancelWalk(walkId, token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/cancel`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al cancelar paseo');
-  }
-
-  return res.json();
-}
-
 export async function getWalkSummary(walkId, token) {
   const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/summary`, {
     headers: {

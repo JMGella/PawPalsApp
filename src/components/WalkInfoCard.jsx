@@ -30,7 +30,7 @@ export function WalkInfoCard({ walk, isCreator, onStatusChange, onEdit }) {
         <h2 className="card-title">{walk.title}</h2>
         
         <div className="mb-3">
-          {/* Mostrar badge o desplegable según si eres el creador */}
+          {/* badge o dropdown según creador */}
           {isCreator ? (
             <select 
               className="form-select form-select-sm w-auto"
@@ -49,12 +49,12 @@ export function WalkInfoCard({ walk, isCreator, onStatusChange, onEdit }) {
         </div>
 
         <p className="card-text">
-          <strong>📅 Inicio:</strong> {formatDateTime(walk.startTime)}<br />
-          <strong>🏁 Fin:</strong> {formatDateTime(walk.endTime)}<br />
-          <strong>🐕 Perros:</strong> {walk.participantsCount} / {walk.maxDogs}<br />
+          <strong><i className="bi bi-calendar-event me-1"></i>Inicio:</strong> {formatDateTime(walk.startTime)}<br />
+          <strong><i className="bi bi-flag-fill me-1"></i>Fin:</strong> {formatDateTime(walk.endTime)}<br />
+          <strong><i className="bi bi-people-fill me-1"></i>Perros:</strong> {walk.participantsCount} / {walk.maxDogs}<br />
           {walk.creator && (
             <>
-              <strong>👤 Creado por:</strong> {walk.creator.displayName} (@{walk.creator.username})<br />
+              <strong><i className="bi bi-person-fill me-1"></i>Creado por:</strong> {walk.creator.displayName} (@{walk.creator.username})<br />
             </>
           )}
         </p>
@@ -66,13 +66,13 @@ export function WalkInfoCard({ walk, isCreator, onStatusChange, onEdit }) {
           </div>
         )}
 
-        {/* Boton de editar si eres el creador del paseo */}
+        {/* boton editar */}
         {isCreator && (
           <button 
             className="btn btn-outline-info btn-sm"
             onClick={onEdit}
           >
-            ✏️ Editar paseo
+            <i className="bi bi-pencil-fill me-1"></i>Editar paseo
           </button>
         )}
       </div>

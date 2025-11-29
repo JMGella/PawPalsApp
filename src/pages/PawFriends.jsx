@@ -44,7 +44,7 @@ export function PawFriends() {
       setError('');
       await followDog(user.id, dogId, token);
       loadFollowedDogs();
-      // Actualizar resultados de búsqueda si existen
+      // actualizar búsqueda si hay resultados
       if (searchResults.length > 0) {
         setSearchResults(prevResults => 
           prevResults.map(dog => 
@@ -84,13 +84,13 @@ export function PawFriends() {
           </div>
         )}
 
-        {/* Buscador */}
+        {/* buscador */}
         <SearchBox 
           onSearch={handleSearch}
           placeholder="Nombre del perro..."
         />
 
-        {/* Resultados de búsqueda */}
+        {/* resultados búsqueda */}
         {searchResults.length > 0 && (
           <div className="mb-4">
             <h3>Resultados de búsqueda</h3>
@@ -110,7 +110,7 @@ export function PawFriends() {
           </div>
         )}
 
-        {/* Perros seguidos */}
+        {/* perros seguidos */}
         <div>
           <h3>Perros que sigues ({followedDogs.length})</h3>
           {loading ? (

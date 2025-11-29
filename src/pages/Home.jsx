@@ -69,7 +69,7 @@ export function Home() {
       <Navbar />
       
       <div className="container mt-4">
-        {/* Header con saludo y avatar */}
+        {/* header */}
         <div className="card mb-4">
           <div className="card-body">
             <div className="d-flex align-items-center">
@@ -80,7 +80,9 @@ export function Home() {
                 style={{ width: '80px', height: '80px' }}
               />
               <div>
-                <h2 className="mb-1">¡Hola, {user?.displayName || user?.username}! 👋</h2>
+                <h2 className="mb-1">
+                  ¡Hola, {user?.displayName || user?.username}! <i className="bi bi-hand-wave"></i>
+                </h2>
                 <p className="text-muted mb-0">Bienvenido a PawPals</p>
               </div>
             </div>
@@ -93,10 +95,10 @@ export function Home() {
           </div>
         )}
 
-        {/* Mis perros */}
+        {/* mis perros */}
         <HomeSection
           title="Mis perros"
-          icon="🐶"
+          icon={<i className="bi bi-house-heart-fill"></i>}
           linkTo="/dogs"
           items={myDogs}
           emptyMessage="No tienes perros registrados."
@@ -111,10 +113,10 @@ export function Home() {
           </div>
         </HomeSection>
 
-        {/* Paseos de mis perros */}
+        {/* paseos de mis perros */}
         <HomeSection
           title="Paseos de mis perros"
-          icon="🐕"
+          icon={<i className="bi bi-signpost-2-fill"></i>}
           linkTo="/walks"
           items={joinedWalks}
           emptyMessage="Tus perros no están apuntados a ningún paseo todavía."
@@ -128,10 +130,10 @@ export function Home() {
           </div>
         </HomeSection>
 
-        {/* Mis paseos */}
+        {/* mis paseos creados */}
         <HomeSection
           title="Mis paseos"
-          icon="📝"
+          icon={<i className="bi bi-pencil-square"></i>}
           linkTo="/walks"
           items={myWalks}
           emptyMessage="No has creado ningún paseo todavía."
@@ -146,10 +148,10 @@ export function Home() {
           </div>
         </HomeSection>
 
-        {/* Próximos paseos disponibles */}
+        {/* próximos paseos */}
         <HomeSection
           title="Próximos paseos"
-          icon="🌟"
+          icon={<i className="bi bi-star-fill"></i>}
           linkTo="/walks"
           items={upcomingWalks}
           emptyMessage="No hay paseos próximos disponibles."
@@ -163,10 +165,10 @@ export function Home() {
           </div>
         </HomeSection>
 
-        {/* PawFriends*/}
+        {/* pawfriends */}
         <HomeSection
           title="PawFriends"
-          icon="❤️"
+          icon={<i className="bi bi-heart-fill"></i>}
           linkTo="/pawfriends"
           items={followedDogs}
           emptyMessage="No sigues a ningún perro todavía."

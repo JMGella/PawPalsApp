@@ -5,7 +5,9 @@ export function Landing() {
     <div className="container">
       <div className="row justify-content-center mt-5">
         <div className="col-md-8 text-center">
-          <h1 className="display-4 mb-4">🐾 Bienvenido a PawPals</h1>
+          <h1 className="display-4 mb-4">
+            <i className="bi bi-paw me-3"></i>Bienvenido a PawPals
+          </h1>
           <p className="lead mb-4">
             La red social para conectar con otros dueños de perros y organizar paseos
           </p>

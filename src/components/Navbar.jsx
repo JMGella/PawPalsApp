@@ -13,7 +13,9 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info mb-4">
       <div className="container">
-        <Link className="navbar-brand text-dark fw-bold" to="/">🐾 PawPals</Link>
+        <Link className="navbar-brand text-dark fw-bold" to="/">
+          <i className="bi bi-paw me-2"></i>PawPals
+        </Link>
         
         <button 
           className="navbar-toggler" 

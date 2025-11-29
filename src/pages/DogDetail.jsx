@@ -60,7 +60,7 @@ export function DogDetail() {
         await followDog(user.id, dogId, token);
       }
       
-      // Recargar solo los perros seguidos
+      // recargar perros seguidos
       const followedDogsData = await getFollowedDogs(user.id, token);
       setFollowedDogs(followedDogsData);
     } catch (err) {
@@ -119,7 +119,7 @@ export function DogDetail() {
       
       <div className="container">
         <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
-          ← Volver
+          Volver
         </button>
 
         {error && (
@@ -130,7 +130,7 @@ export function DogDetail() {
         )}
 
         <div className="row">
-          {/* Información del perro */}
+          {/* info perro */}
           <div className="col-md-4 mb-4">
             <DogCardDetail 
               dog={dog}
@@ -141,7 +141,7 @@ export function DogDetail() {
             />
           </div>
 
-          {/* Paseos del perro */}
+          {/* paseos del perro */}
           <div className="col-md-8">
             <DogWalksList walks={walks} />
           </div>

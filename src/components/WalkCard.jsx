@@ -67,8 +67,7 @@ export function WalkCard({ walk }) {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">{walk.title}</h5>
-        
-        {/* Minimapa */}
+
         {walk.latitude && walk.longitude && (
           <div style={{ height: '150px', marginBottom: '15px', borderRadius: '4px', overflow: 'hidden' }}>
             <MapContainer 
@@ -93,12 +92,7 @@ export function WalkCard({ walk }) {
         <p className="card-text">
           <strong>📅 Inicio:</strong> {formatDateTime(walk.startTime)}<br />
           <strong>🐕 Perros:</strong> {loadingParticipants ? '...' : `${participantsCount} / ${walk.maxDogs}`}<br />
-          {walk.description && (
-            <>
-              <strong>Descripción:</strong> {walk.description}<br />
-            </>
-          )}
-          <strong>Estado:</strong> {' '}
+          <strong>👤 Creado por:</strong> {walk.creator.displayName}<br />
           <span className={`badge ${statusConfig.bg}`}>
             {statusConfig.text}
           </span>

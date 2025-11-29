@@ -11,7 +11,6 @@ export function Register() {
     username: '',
     profileImageUrl: '',
   });
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,10 +22,9 @@ export function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Las contraseñas no coinciden');
+      alert('Las contraseñas no coinciden');
       return;
     }
 
@@ -41,7 +39,7 @@ export function Register() {
 
       navigate('/login');
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -118,12 +116,6 @@ export function Register() {
                     required
                   />
                 </div>
-
-                {error && (
-                  <div className="alert alert-danger" role="alert">
-                    {error}
-                  </div>
-                )}
 
                 <button type="submit" className="btn btn-info w-100 mb-3">
                   Registrarse

@@ -1,12 +1,7 @@
 import defaultDogImage from '../assets/default_dog.png';
+import { formatDate } from '../utils/formatters';
 
 export function DogCardDetail({ dog, showFollowButton, isFollowing, onFollowToggle, followLoading }) {
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const [year, month, day] = dateString.split('-');
-    return `${day}/${month}/${year}`;
-  };
-
   return (
     <div className="card">
       <img 

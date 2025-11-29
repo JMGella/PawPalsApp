@@ -15,7 +15,6 @@ export function DogDetail() {
   const [walks, setWalks] = useState([]);
   const [followedDogs, setFollowedDogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [followLoading, setFollowLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +24,6 @@ export function DogDetail() {
   const loadDogData = async () => {
     try {
       setLoading(true);
-      setError('');
       const [dogData, walksData, followedDogsData] = await Promise.all([
         getDogById(dogId, token),
         getDogWalksDetail(dogId, token),
@@ -35,7 +33,7 @@ export function DogDetail() {
       setWalks(walksData);
       setFollowedDogs(followedDogsData);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -52,7 +50,6 @@ export function DogDetail() {
   const handleFollowToggle = async () => {
     try {
       setFollowLoading(true);
-      setError('');
       
       if (isFollowing()) {
         await unfollowDog(user.id, dogId, token);
@@ -64,7 +61,7 @@ export function DogDetail() {
       const followedDogsData = await getFollowedDogs(user.id, token);
       setFollowedDogs(followedDogsData);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setFollowLoading(false);
     }
@@ -76,22 +73,6 @@ export function DogDetail() {
         <Navbar />
         <div className="container">
           <p>Cargando...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <Navbar />
-        <div className="container">
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-          <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-            Volver
-          </button>
         </div>
       </div>
     );
@@ -121,13 +102,6 @@ export function DogDetail() {
         <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
           Volver
         </button>
-
-        {error && (
-          <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            {error}
-            <button type="button" className="btn-close" onClick={() => setError('')}></button>
-          </div>
-        )}
 
         <div className="row">
           {/* info perro */}

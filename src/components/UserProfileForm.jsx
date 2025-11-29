@@ -7,7 +7,6 @@ export function UserProfileForm({ user, onSubmit, onCancel }) {
     email: user?.email || '',
     profileImageUrl: user?.profileImageUrl || ''
   });
-  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,11 +15,10 @@ export function UserProfileForm({ user, onSubmit, onCancel }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     try {
       await onSubmit(formData);
     } catch (err) {
-      setError(err.message);
+      // el error ya se maneja con alert en el componente padre
     }
   };
 
@@ -77,12 +75,6 @@ export function UserProfileForm({ user, onSubmit, onCancel }) {
           placeholder="https://ejemplo.com/imagen.jpg"
         />
       </div>
-
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
 
       <div className="d-flex gap-2">
         <button type="submit" className="btn btn-info flex-grow-1">

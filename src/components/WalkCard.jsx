@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { getWalkParticipants } from '../api/walkParticipation';
 import { useAuth } from '../hooks/useAuth';
+import { formatDateTime } from '../utils/formatters';
 
 // iconos de leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -37,18 +38,6 @@ export function WalkCard({ walk }) {
       loadParticipants();
     }
   }, [walk.id, token]);
-
-  const formatDateTime = (dateTimeString) => {
-    if (!dateTimeString) return '';
-    const date = new Date(dateTimeString);
-    return date.toLocaleString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
 
   const getStatusBadge = (status) => {
     const statusConfig = {

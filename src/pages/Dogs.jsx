@@ -9,7 +9,6 @@ export function Dogs() {
   const { user, token } = useAuth();
   const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingDog, setEditingDog] = useState(null);
 
@@ -23,15 +22,13 @@ export function Dogs() {
       const data = await getUserDogs(user.id, token);
       setDogs(data);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSubmit = async (formData) => {
-    setError('');
-
     try {
       if (editingDog) {
         await updateDog(editingDog.id, {
@@ -49,7 +46,7 @@ export function Dogs() {
       setShowForm(false);
       loadDogs();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -65,7 +62,7 @@ export function Dogs() {
       await deleteDog(dogId, token);
       loadDogs();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -91,12 +88,6 @@ export function Dogs() {
             {showForm ? 'Cancelar' : 'Añadir Perro'}
           </button>
         </div>
-
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
 
         {showForm && (
           <DogForm 

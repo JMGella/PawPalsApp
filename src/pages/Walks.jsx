@@ -11,7 +11,6 @@ export function Walks() {
   const [myWalks, setMyWalks] = useState([]);
   const [joinedWalks, setJoinedWalks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [activeTab, setActiveTab] = useState('upcoming');
 
@@ -22,7 +21,6 @@ export function Walks() {
   const loadWalks = async () => {
     try {
       setLoading(true);
-      setError('');
       if (activeTab === 'upcoming') {
         const data = await getUpcomingWalks(token);
         setUpcomingWalks(data);
@@ -34,7 +32,7 @@ export function Walks() {
         setJoinedWalks(data);
       }
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -42,12 +40,11 @@ export function Walks() {
 
   const handleSubmit = async (formData) => {
     try {
-      setError('');
       await createWalk(user.id, formData, token);
       setShowForm(false);
       loadWalks();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -72,12 +69,6 @@ export function Walks() {
             {showForm ? 'Cancelar' : 'Crear Paseo'}
           </button>
         </div>
-
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
 
         {showForm && (
           <WalkForm 

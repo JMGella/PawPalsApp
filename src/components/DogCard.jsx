@@ -1,16 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import defaultDogImage from '../assets/default_dog.png';
+import { formatDate } from '../utils/formatters';
 
 export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowing, actions = 'edit' }) {
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const [year, month, day] = dateString.split('-');
-    return `${day}/${month}/${year}`;
-  };
 
   const isMyDog = () => {
     return dog?.owner?.id === user?.id;

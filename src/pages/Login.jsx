@@ -5,20 +5,18 @@ import { useAuth } from '../hooks/useAuth';
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
     const result = await login({ email, password });
 
     if (result.success) {
       navigate('/dashboard');
     } else {
-      setError(result.error);
+      alert(result.error);
     }
   };
 
@@ -54,12 +52,6 @@ export function Login() {
                     required
                   />
                 </div>
-
-                {error && (
-                  <div className="alert alert-danger" role="alert">
-                    {error}
-                  </div>
-                )}
 
                 <button type="submit" className="btn btn-info w-100 mb-3">
                   Iniciar sesión

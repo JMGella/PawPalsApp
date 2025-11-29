@@ -10,16 +10,14 @@ export function Dashboard() {
   const { user, token, updateUser: updateAuthUser, logout } = useAuth();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState('');
 
   const handleSubmit = async (formData) => {
     try {
-      setError('');
       const updatedUser = await updateUser(user.id, formData, token);
       updateAuthUser(updatedUser);
       setIsEditing(false);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
       throw err;
     }
   };
@@ -30,12 +28,11 @@ export function Dashboard() {
     }
 
     try {
-      setError('');
       await deleteUser(user.id, token);
       logout();
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -57,12 +54,6 @@ export function Dashboard() {
                 </button>
               )}
             </div>
-
-            {error && (
-              <div className="alert alert-danger" role="alert">
-                {error}
-              </div>
-            )}
             
             <div className="card">
               <div className="card-body">

@@ -20,7 +20,6 @@ export function Home() {
   const [upcomingWalks, setUpcomingWalks] = useState([]);
   const [followedDogs, setFollowedDogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     if (user && token) {
@@ -33,7 +32,6 @@ export function Home() {
   const loadHomeData = async () => {
     try {
       setLoading(true);
-      setError('');
       const [dogsData, joinedData, myWalksData, upcomingData, followedData] = await Promise.all([
         getUserDogs(user.id, token),
         getJoinedWalks(user.id, token),
@@ -47,7 +45,7 @@ export function Home() {
       setUpcomingWalks(upcomingData.slice(0, 6));
       setFollowedDogs(followedData);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -88,12 +86,6 @@ export function Home() {
             </div>
           </div>
         </div>
-
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
 
         {/* mis perros */}
         <HomeSection

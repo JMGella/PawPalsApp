@@ -10,6 +10,7 @@ import { useAuth } from '../hooks/useAuth';
 import { getWalkSummary, updateWalk } from '../api/walks';
 import { addDogToWalk, removeDogFromWalk, updateParticipation } from '../api/walkParticipation';
 import { getUserDogs } from '../api/dogs';
+import { formatToDateTimeLocal } from '../utils/formatters';
 
 export function WalkDetail() {
   const { walkId } = useParams();
@@ -19,10 +20,9 @@ export function WalkDetail() {
   const [participants, setParticipants] = useState([]);
   const [myDogs, setMyDogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const [showAddDogModal, setShowAddDogModal] = useState(false);
   const [selectedDogId, setSelectedDogId] = useState('');
-  const [submitting, setSubmitting] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,6 @@ export function WalkDetail() {
   const loadWalkData = async () => {
     try {
       setLoading(true);
-      setError('');
       // getWalkSummary devuelve walk + participantes en una llamada
       const [summaryData, dogsData] = await Promise.all([
         getWalkSummary(walkId, token),
@@ -42,7 +41,7 @@ export function WalkDetail() {
       setParticipants(summaryData.participants);
       setMyDogs(dogsData);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -50,13 +49,12 @@ export function WalkDetail() {
 
   const handleAddDog = async () => {
     if (!selectedDogId) {
-      setError('Por favor selecciona un perro');
+      alert('Por favor selecciona un perro');
       return;
     }
 
     try {
       setSubmitting(true);
-      setError('');
       await addDogToWalk(walkId, { 
         dogId: parseInt(selectedDogId),
         handlerId: user.id
@@ -65,7 +63,7 @@ export function WalkDetail() {
       setSelectedDogId('');
       loadWalkData();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setSubmitting(false);
     }
@@ -77,11 +75,10 @@ export function WalkDetail() {
     }
 
     try {
-      setError('');
       await removeDogFromWalk(walkDogId, token);
       loadWalkData();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -91,50 +88,35 @@ export function WalkDetail() {
 
   const handleStatusChange = async (participantId, newStatus) => {
     try {
-      setError('');
       await updateParticipation(participantId, { status: newStatus }, token);
       loadWalkData();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   const handleWalkStatusChange = async (newStatus) => {
     try {
-      setError('');
       await updateWalk(walkId, { status: newStatus }, token);
       loadWalkData();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   const handleEditWalk = async (formData) => {
     try {
-      setError('');
       await updateWalk(walkId, formData, token);
       setShowEditForm(false);
       loadWalkData();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   // preparar datos del paseo para el formulario
   const getWalkFormData = () => {
     if (!walk) return null;
-    
-    // convertir fecha ISO a formato datetime-local
-    const formatToDateTimeLocal = (isoString) => {
-      if (!isoString) return '';
-      const date = new Date(isoString);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    };
 
     return {
       title: walk.title,
@@ -159,22 +141,6 @@ export function WalkDetail() {
         <Navbar />
         <div className="container">
           <p>Cargando...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <Navbar />
-        <div className="container">
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-          <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-            Volver
-          </button>
         </div>
       </div>
     );
@@ -207,13 +173,6 @@ export function WalkDetail() {
         <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
           Volver
         </button>
-
-        {error && (
-          <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            {error}
-            <button type="button" className="btn-close" onClick={() => setError('')}></button>
-          </div>
-        )}
 
         {/* formulario o vista */}
         {showEditForm ? (
@@ -266,7 +225,6 @@ export function WalkDetail() {
           onClose={() => {
             setShowAddDogModal(false);
             setSelectedDogId('');
-            setError('');
           }}
           onSubmit={handleAddDog}
         />

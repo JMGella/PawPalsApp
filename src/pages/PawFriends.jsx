@@ -11,7 +11,6 @@ export function PawFriends() {
   const [followedDogs, setFollowedDogs] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     loadFollowedDogs();
@@ -23,7 +22,7 @@ export function PawFriends() {
       const data = await getFollowedDogs(user.id, token);
       setFollowedDogs(data);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
@@ -31,17 +30,15 @@ export function PawFriends() {
 
   const handleSearch = async (searchName) => {
     try {
-      setError('');
       const results = await searchDogs(searchName, token);
       setSearchResults(results);
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   const handleFollow = async (dogId) => {
     try {
-      setError('');
       await followDog(user.id, dogId, token);
       loadFollowedDogs();
       // actualizar búsqueda si hay resultados
@@ -53,17 +50,16 @@ export function PawFriends() {
         );
       }
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
   const handleUnfollow = async (dogId) => {
     try {
-      setError('');
       await unfollowDog(user.id, dogId, token);
       loadFollowedDogs();
     } catch (err) {
-      setError(err.message);
+      alert(err.message);
     }
   };
 
@@ -77,12 +73,6 @@ export function PawFriends() {
       
       <div className="container">
         <h1 className="mb-4">PawFriends</h1>
-
-        {error && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
 
         {/* buscador */}
         <SearchBox 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { formatToDateTimeLocal, formatToISO } from '../utils/formatters';
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -60,13 +61,6 @@ export function WalkForm({ initialData, onSubmit, onCancel }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // convertir datetime a ISO
-    const formatToISO = (dateTimeString) => {
-      if (!dateTimeString) return null;
-      const date = new Date(dateTimeString);
-      return date.toISOString();
-    };
-
     onSubmit({
       ...formData,
       startTime: formatToISO(formData.startTime),

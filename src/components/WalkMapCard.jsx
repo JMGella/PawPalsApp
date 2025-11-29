@@ -19,11 +19,11 @@ export function WalkMapCard({ latitude, longitude, height = '300px' }) {
     <div className="card">
       <div className="card-body">
         <strong>📍 Ubicación:</strong>
-        <div style={{ height, marginTop: '10px', borderRadius: '4px', overflow: 'hidden' }}>
+        <div className="rounded overflow-hidden mt-2" style={{ height }}>
           <MapContainer 
             center={[latitude, longitude]} 
             zoom={15} 
-            style={{ height: '100%', width: '100%' }}
+            className="h-100 w-100"
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

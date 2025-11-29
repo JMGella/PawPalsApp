@@ -29,17 +29,11 @@ export function ParticipantCard({
           <div className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
               <img 
-                src={participant.dog?.profileImageUrl || defaultDogImage}
+                src={participant.dog?.profileImageUrl?.trim() ? participant.dog.profileImageUrl : defaultDogImage}
                 alt={participant.dog?.name}
                 onClick={() => navigate(`/dogs/${participant.dog?.id}`)}
-                style={{ 
-                  width: '80px', 
-                  height: '80px', 
-                  objectFit: 'cover', 
-                  borderRadius: '8px',
-                  marginRight: '15px',
-                  cursor: 'pointer'
-                }}
+                className="rounded me-3"
+                style={{ width: '80px', height: '80px', objectFit: 'cover', cursor: 'pointer' }}
               />
               <div>
                 <h5 className="mb-1">{participant.dog?.name}</h5>
@@ -49,10 +43,9 @@ export function ParticipantCard({
                 {/* Mostrar estado o desplegable si soy el creador */}
                 {isWalkScheduled && isCreator ? (
                   <select 
-                    className="form-select form-select-sm mt-2"
+                    className="form-select form-select-sm mt-2 w-auto"
                     value={participant.status}
                     onChange={(e) => onStatusChange(participant.id, e.target.value)}
-                    style={{ width: 'auto', display: 'inline-block' }}
                   >
                     <option value="REQUESTED">Solicitado</option>
                     <option value="JOINED">Apuntado</option>

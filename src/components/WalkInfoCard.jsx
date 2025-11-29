@@ -33,10 +33,9 @@ export function WalkInfoCard({ walk, isCreator, onStatusChange, onEdit }) {
           {/* Mostrar badge o desplegable según si eres el creador */}
           {isCreator ? (
             <select 
-              className="form-select form-select-sm"
+              className="form-select form-select-sm w-auto"
               value={walk.status}
               onChange={(e) => onStatusChange(e.target.value)}
-              style={{ width: 'auto', display: 'inline-block' }}
             >
               <option value="SCHEDULED">Programado</option>
               <option value="COMPLETED">Completado</option>
@@ -67,7 +66,7 @@ export function WalkInfoCard({ walk, isCreator, onStatusChange, onEdit }) {
           </div>
         )}
 
-        {/* Botón de editar si eres el creador */}
+        {/* Boton de editar si eres el creador del paseo */}
         {isCreator && (
           <button 
             className="btn btn-outline-info btn-sm"

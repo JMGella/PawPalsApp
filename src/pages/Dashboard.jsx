@@ -18,15 +18,10 @@ export function Dashboard() {
               <div className="card-body">
                 <div className="d-flex align-items-center mb-3">
                   <img 
-                    src={user?.profileImageUrl || defaultUserImage}
+                    src={user?.profileImageUrl?.trim() ? user.profileImageUrl : defaultUserImage}
                     alt={user?.displayName || user?.username}
-                    style={{ 
-                      width: '100px', 
-                      height: '100px', 
-                      objectFit: 'cover',
-                      borderRadius: '50%',
-                      marginRight: '20px'
-                    }}
+                    className="rounded-circle object-fit-cover me-3"
+                    style={{ width: '100px', height: '100px' }}
                   />
                   <div>
                     <h3 className="mb-1">{user?.displayName || user?.username}</h3>

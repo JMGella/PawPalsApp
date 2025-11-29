@@ -181,11 +181,11 @@ export function WalkForm({ initialData, onSubmit, onCancel }) {
             <input type="hidden" name="latitude" value={formData.latitude} />
             <input type="hidden" name="longitude" value={formData.longitude} />
             
-            <div style={{ height: '400px', borderRadius: '4px', overflow: 'hidden' }}>
+            <div className="rounded overflow-hidden" style={{ height: '400px' }}>
               <MapContainer 
                 center={position} 
                 zoom={13} 
-                style={{ height: '100%', width: '100%' }}
+                className="h-100 w-100"
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

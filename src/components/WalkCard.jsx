@@ -69,11 +69,11 @@ export function WalkCard({ walk }) {
         <h5 className="card-title">{walk.title}</h5>
 
         {walk.latitude && walk.longitude && (
-          <div style={{ height: '150px', marginBottom: '15px', borderRadius: '4px', overflow: 'hidden' }}>
+          <div className="rounded overflow-hidden mb-3" style={{ height: '150px' }}>
             <MapContainer 
               center={[walk.latitude, walk.longitude]} 
               zoom={14} 
-              style={{ height: '100%', width: '100%' }}
+              className="h-100 w-100"
               zoomControl={false}
               dragging={false}
               scrollWheelZoom={false}

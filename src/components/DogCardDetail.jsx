@@ -10,10 +10,10 @@ export function DogCardDetail({ dog, showFollowButton, isFollowing, onFollowTogg
   return (
     <div className="card">
       <img 
-        src={dog.profileImageUrl || defaultDogImage} 
-        className="card-img-top" 
+        src={dog.profileImageUrl?.trim() ? dog.profileImageUrl : defaultDogImage} 
+        className="card-img-top object-fit-cover" 
         alt={dog.name}
-        style={{ height: '300px', objectFit: 'cover' }}
+        style={{ height: '300px' }}
       />
       <div className="card-body">
         <h2 className="card-title">{dog.name}</h2>
@@ -36,7 +36,7 @@ export function DogCardDetail({ dog, showFollowButton, isFollowing, onFollowTogg
             onClick={onFollowToggle}
             disabled={followLoading}
           >
-            {followLoading ? 'Cargando...' : isFollowing ? '✓ Siguiendo' : '+ Seguir'}
+            {followLoading ? 'Cargando...' : isFollowing ? 'Dejar de seguir' : 'Seguir'}
           </button>
         )}
       </div>

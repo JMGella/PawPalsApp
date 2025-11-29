@@ -47,14 +47,14 @@ export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowi
           className="btn btn-outline-info btn-sm"
           onClick={() => onUnfollow(dog.id)}
         >
-          ✓ Siguiendo
+          Dejar de seguir
         </button>
       ) : (
         <button 
           className="btn btn-info btn-sm"
           onClick={() => onFollow(dog.id)}
         >
-          + Seguir
+          Seguir
         </button>
       );
     }
@@ -65,14 +65,14 @@ export function DogCard({ dog, onDelete, onEdit, onFollow, onUnfollow, isFollowi
   return (
     <div className="card h-100">
       <div 
-        style={{ cursor: 'pointer' }}
+        className="cursor-pointer"
         onClick={() => navigate(`/dogs/${dog.id}`)}
       >
         <img 
-          src={dog.profileImageUrl || defaultDogImage} 
-          className="card-img-top" 
+          src={dog.profileImageUrl?.trim() ? dog.profileImageUrl : defaultDogImage} 
+          className="card-img-top object-fit-cover" 
           alt={dog.name}
-          style={{ height: '200px', objectFit: 'cover' }}
+          style={{ height: '200px' }}
         />
         <div className="card-body">
           <h5 className="card-title">{dog.name}</h5>

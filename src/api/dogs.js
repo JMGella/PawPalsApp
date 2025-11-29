@@ -11,8 +11,7 @@ export async function createDog(userId, dogData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al crear perro');
+    throw new Error('Error al crear perro');
   }
 
   return res.json();
@@ -27,8 +26,7 @@ export async function getUserDogs(userId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener perros del usuario');
+    throw new Error('Error al obtener perros del usuario');
   }
 
   return res.json();
@@ -43,8 +41,7 @@ export async function getDogById(dogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener perro');
+    throw new Error('Error al obtener perro');
   }
 
   return res.json();
@@ -61,8 +58,7 @@ export async function updateDog(dogId, dogData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al actualizar perro');
+    throw new Error('Error al actualizar perro');
   }
 
   return res.json();
@@ -78,8 +74,7 @@ export async function deleteDog(dogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al eliminar perro');
+    throw new Error('Error al eliminar perro');
   }
 }
 
@@ -92,24 +87,7 @@ export async function searchDogs(name, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al buscar perros');
-  }
-
-  return res.json();
-}
-
-export async function getDogWalks(dogId, token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/dogs/${dogId}/walks`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos del perro');
+    throw new Error('Error al buscar perros');
   }
 
   return res.json();
@@ -124,8 +102,7 @@ export async function getDogWalksDetail(dogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos del perro');
+    throw new Error('Error al obtener paseos del perro');
   }
 
   return res.json();

@@ -15,11 +15,7 @@ export function UserProfileForm({ user, onSubmit, onCancel }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
       await onSubmit(formData);
-    } catch (err) {
-      // el error ya se maneja con alert en el componente padre
-    }
   };
 
   return (

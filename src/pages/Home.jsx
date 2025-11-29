@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { WalkCard } from '../components/WalkCard';
 import { DogCard } from '../components/DogCard';
@@ -13,7 +12,6 @@ import defaultUserImage from '../assets/default_user.png';
 
 export function Home() {
   const { user, token } = useAuth();
-  const navigate = useNavigate();
   const [myDogs, setMyDogs] = useState([]);
   const [joinedWalks, setJoinedWalks] = useState([]);
   const [myWalks, setMyWalks] = useState([]);

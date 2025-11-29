@@ -10,8 +10,7 @@ export async function login(credentials) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al iniciar sesión');
+    throw new Error('Error al iniciar sesión');
   }
 
   return res.json();

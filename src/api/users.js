@@ -9,8 +9,7 @@ export async function getCurrentUser(token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener usuario actual');
+    throw new Error('Error al obtener usuario actual');
   }
 
   return res.json();
@@ -26,40 +25,7 @@ export async function createUser(userData) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al crear usuario');
-  }
-
-  return res.json();
-}
-
-export async function getUser(userId, token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/users/${userId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener usuario');
-  }
-
-  return res.json();
-}
-
-export async function getAllUsers(token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/users`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener usuarios');
+    throw new Error('Error al crear usuario');
   }
 
   return res.json();
@@ -76,8 +42,7 @@ export async function updateUser(userId, userData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al actualizar usuario');
+    throw new Error('Error al actualizar usuario');
   }
 
   return res.json();
@@ -93,7 +58,6 @@ export async function deleteUser(userId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al eliminar usuario');
+    throw new Error('Error al eliminar usuario');
   }
 }

@@ -11,7 +11,6 @@ import { DogDetail } from './pages/DogDetail';
 import { Walks } from './pages/Walks';
 import { WalkDetail } from './pages/WalkDetail';
 import { PawFriends } from './pages/PawFriends';
-import './App.css';
 
 function App() {
   const { isAuthenticated } = useAuth();

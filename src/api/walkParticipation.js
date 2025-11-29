@@ -11,8 +11,7 @@ export async function addDogToWalk(walkId, participationData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al unir perro al paseo');
+    throw new Error('Error al unir perro al paseo');
   }
 
   return res.json();
@@ -27,8 +26,7 @@ export async function getWalkParticipants(walkId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener participantes del paseo');
+    throw new Error('Error al obtener participantes del paseo');
   }
 
   return res.json();
@@ -45,8 +43,7 @@ export async function updateParticipation(walkDogId, participationData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al actualizar participación');
+    throw new Error('Error al actualizar participación');
   }
 
   return res.json();
@@ -62,7 +59,6 @@ export async function removeDogFromWalk(walkDogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al eliminar perro del paseo');
+    throw new Error('Error al eliminar perro del paseo');
   }
 }

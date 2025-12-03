@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import icon from '../assets/icon.png';
 
 export function Navbar() {
   const { user, logout } = useAuth();
@@ -13,8 +14,13 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-info mb-4">
       <div className="container">
-        <Link className="navbar-brand text-dark fw-bold" to="/">
-          <i className="bi bi-paw me-2"></i>PawPals
+        <Link className="navbar-brand text-dark fw-bold d-flex align-items-center" to="/">
+          <img 
+            src={icon} 
+            alt="PawPals Icon" 
+            style={{ width: '32px', height: '32px', marginRight: '8px' }}
+          />
+          PawPals
         </Link>
         
         <button 

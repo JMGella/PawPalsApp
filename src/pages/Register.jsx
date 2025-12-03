@@ -44,8 +44,9 @@ export function Register() {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center mt-5">
+    <div style={{ backgroundColor: '#a0d3d9', minHeight: '100vh', margin: 0, padding: 0 }}>
+      <div className="container" style={{ paddingTop: '3rem' }}>
+      <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card shadow">
             <div className="card-body p-4">
@@ -128,6 +129,7 @@ export function Register() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

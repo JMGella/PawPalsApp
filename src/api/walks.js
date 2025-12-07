@@ -11,8 +11,7 @@ export async function createWalk(userId, walkData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al crear paseo');
+    throw new Error('Error al crear paseo');
   }
 
   return res.json();
@@ -27,24 +26,7 @@ export async function getUserWalks(userId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos del usuario');
-  }
-
-  return res.json();
-}
-
-export async function getAllWalks(token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/walks`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos');
+    throw new Error('Error al obtener paseos del usuario');
   }
 
   return res.json();
@@ -59,24 +41,7 @@ export async function getUpcomingWalks(token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos próximos');
-  }
-
-  return res.json();
-}
-
-export async function getWalkById(walkId, token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseo');
+    throw new Error('Error al obtener paseos próximos');
   }
 
   return res.json();
@@ -93,25 +58,7 @@ export async function updateWalk(walkId, walkData, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al actualizar paseo');
-  }
-
-  return res.json();
-}
-
-export async function cancelWalk(walkId, token) {
-  const res = await fetch(`${API_URL}/pawpalsapi/walks/${walkId}/cancel`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al cancelar paseo');
+    throw new Error('Error al actualizar paseo');
   }
 
   return res.json();
@@ -126,8 +73,7 @@ export async function getWalkSummary(walkId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener resumen del paseo');
+    throw new Error('Error al obtener resumen del paseo');
   }
 
   return res.json();
@@ -142,8 +88,7 @@ export async function getJoinedWalks(userId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener paseos unidos');
+    throw new Error('Error al obtener paseos unidos');
   }
 
   return res.json();

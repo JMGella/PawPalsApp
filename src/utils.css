@@ -1,0 +1,11 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.modal-backdrop-custom {
+  background-color: rgba(0, 0, 0, 0.5);
+}

@@ -9,8 +9,7 @@ export async function getFollowedDogs(userId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al obtener perros seguidos');
+    throw new Error('Error al obtener perros seguidos');
   }
 
   return res.json();
@@ -26,8 +25,7 @@ export async function followDog(userId, dogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al seguir perro');
+    throw new Error('Error al seguir perro');
   }
 
   return res.json();
@@ -43,7 +41,6 @@ export async function unfollowDog(userId, dogId, token) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Error al dejar de seguir perro');
+    throw new Error('Error al dejar de seguir perro');
   }
 }

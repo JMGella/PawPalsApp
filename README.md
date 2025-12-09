@@ -1,16 +1,108 @@
-# React + Vite
+# PawPals App 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+PawPals es una aplicación web que conecta a dueños de perros para organizar paseos, socializar mascotas y gestionar perfiles de perros.  
+Este repositorio contiene el **frontend desarrollado con React (Vite)**, que consume la API REST creada con Spring Boot.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Tecnologías Utilizadas
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- React 18
+- Vite 6
+- React Router DOM 7
+- Bootstrap 5 + Bootstrap Icons
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Instalación y Ejecución
+
+### 1. Clona el repositorio
+```
+git clone https://github.com/USER/PawPalsApp.git
+```
+
+### 2. Instala las dependencias
+```
+npm install
+```
+
+### 3. Configura variables de entorno
+```
+VITE_API_URL=http://localhost:8080
+```
+
+### 4. Servidor de desarrollo
+```
+npm run dev
+```
+
+### 5. Build producción
+```
+npm run build
+```
+
+---
+
+## 🧭 Estructura del Proyecto
+```
+src/
+├── api/
+├── components/
+├── pages/
+├── context/
+├── hooks/
+├── utils/
+├── assets/
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## 🔐 Autenticación
+Manejo de sesión con:
+- AuthContext
+- useAuth()
+- ProtectedRoute
+
+JWT almacenado en localStorage.
+
+---
+
+## 🐶 Funcionalidades Principales
+- Registro e inicio de sesión
+- Gestión de perros (CRUD)
+- Seguimiento de perros (PawFriends)
+- Gestión de paseos (crear, listar, unirse, editar, cancelar)
+- Dashboard principal
+- Landing page
+
+---
+
+
+## 🌐 Comunicación con la API
+Ejemplo:
+```js
+import { getUpcomingWalks } from "../api/walks";
+const walks = await getUpcomingWalks(token);
+```
+
+---
+
+## 🎨 Diseño
+- Bootstrap 5
+- Diseño responsive
+- Iconos Bootstrap Icons
+- Colores corporativos
+
+---
+
+## 🔧 Scripts
+```
+npm run dev
+npm run build
+npm run preview
+npm run lint
+```
